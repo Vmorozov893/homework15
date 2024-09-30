@@ -6,13 +6,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/calculator")
-public class Calculator {
+@RequestMapping("calculator")
+public class CalculatorController {
 
     private final CalculatorService calculatorService;
+    private NumberDto dto = new NumberDto();
 
-
-    public Calculator(CalculatorService calculatorService) {
+    public CalculatorController(CalculatorService calculatorService) {
         this.calculatorService = calculatorService;
     }
 
@@ -21,46 +21,54 @@ public class Calculator {
         return calculatorService.hello();
     }
 
-    @GetMapping(path = "/plus")
+    @GetMapping(path = "plus")
     public String plus(@RequestParam(required = false) Integer num1, @RequestParam(required = false) Integer num2) {
-        if (num1 == null || num2 == null) {
+        dto.setNum1(num1);
+        dto.setNum2(num2);
+        if (calculatorService.check(dto.getNum1(), dto.getNum2())) {
             return "Вы должны ввести оба аргумента!";
         }
 
-        int result = calculatorService.plus(num1, num2);
-        return num1 + " + " + num2 + " = " + result;
+        int result = calculatorService.plus(dto.getNum1(), dto.getNum2());
+        return dto.getNum1() + " + " + dto.getNum2() + " = " + result;
     }
 
-    @GetMapping(path = "/minus")
+    @GetMapping(path = "minus")
     public String minus(@RequestParam(required = false) Integer num1, @RequestParam(required = false) Integer num2) {
-        if (num1 == null || num2 == null) {
+        dto.setNum1(num1);
+        dto.setNum2(num2);
+        if (calculatorService.check(dto.getNum1(), dto.getNum2())) {
             return "Вы должны ввести оба аргумента!";
         }
 
-        int result = calculatorService.minus(num1, num2);
-        return num1 + " - " + num2 + " = " + result;
+        int result = calculatorService.minus(dto.getNum1(), dto.getNum2());
+        return dto.getNum1() + " - " + dto.getNum2() + " = " + result;
     }
 
-    @GetMapping(path = "/multiply")
+    @GetMapping(path = "multiply")
     public String multiply(@RequestParam(required = false) Integer num1, @RequestParam(required = false) Integer num2) {
-        if (num1 == null || num2 == null) {
+        dto.setNum1(num1);
+        dto.setNum2(num2);
+        if (calculatorService.check(dto.getNum1(), dto.getNum2())) {
             return "Вы должны ввести оба аргумента!";
         }
 
-        int result = calculatorService.multiply(num1, num2);
-        return num1 + " * " + num2 + " = " + result;
+        int result = calculatorService.multiply(dto.getNum1(), dto.getNum2());
+        return dto.getNum1() + " * " + dto.getNum2() + " = " + result;
     }
 
-    @GetMapping(path = "/divide")
+    @GetMapping(path = "divide")
     public String divide(@RequestParam(required = false) Integer num1, @RequestParam(required = false) Integer num2) {
-        if (num1 == null || num2 == null) {
+        dto.setNum1(num1);
+        dto.setNum2(num2);
+        if (calculatorService.check(dto.getNum1(), dto.getNum2())) {
             return "Вы должны ввести оба аргумента!";
         }
-        if (num2 == 0) {
+        if (dto.getNum2() == 0) {
             return "На ноль делить нельзя!";
         }
 
-        int result = calculatorService.divide(num1, num2);
-        return num1 + " / " + num2 + " = " + result;
+        int result = calculatorService.divide(dto.getNum1(), dto.getNum2());
+        return dto.getNum1() + " / " + dto.getNum2() + " = " + result;
     }
 }

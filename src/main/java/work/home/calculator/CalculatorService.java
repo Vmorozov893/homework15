@@ -10,4 +10,7 @@ public interface CalculatorService {
     int multiply(int a, int b);
 
     int divide(int a, int b);
+
+    boolean check(Integer a, Integer b);
+
 }

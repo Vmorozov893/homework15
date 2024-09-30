@@ -24,4 +24,9 @@ public class CalculatorServiceImpl implements CalculatorService {
     public int divide(int a, int b) {
         return a / b;
     }
+
+    public boolean check(Integer a,Integer b){
+        return a == null || b == null;
+    }
+
 }
