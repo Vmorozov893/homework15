@@ -25,9 +25,6 @@ public class CalculatorController {
     public String plus(@RequestParam(required = false) Integer num1, @RequestParam(required = false) Integer num2) {
         dto.setNum1(num1);
         dto.setNum2(num2);
-        if (calculatorService.check(dto.getNum1(), dto.getNum2())) {
-            return "Вы должны ввести оба аргумента!";
-        }
 
         int result = calculatorService.plus(dto.getNum1(), dto.getNum2());
         return dto.getNum1() + " + " + dto.getNum2() + " = " + result;
@@ -37,9 +34,6 @@ public class CalculatorController {
     public String minus(@RequestParam(required = false) Integer num1, @RequestParam(required = false) Integer num2) {
         dto.setNum1(num1);
         dto.setNum2(num2);
-        if (calculatorService.check(dto.getNum1(), dto.getNum2())) {
-            return "Вы должны ввести оба аргумента!";
-        }
 
         int result = calculatorService.minus(dto.getNum1(), dto.getNum2());
         return dto.getNum1() + " - " + dto.getNum2() + " = " + result;
@@ -49,9 +43,6 @@ public class CalculatorController {
     public String multiply(@RequestParam(required = false) Integer num1, @RequestParam(required = false) Integer num2) {
         dto.setNum1(num1);
         dto.setNum2(num2);
-        if (calculatorService.check(dto.getNum1(), dto.getNum2())) {
-            return "Вы должны ввести оба аргумента!";
-        }
 
         int result = calculatorService.multiply(dto.getNum1(), dto.getNum2());
         return dto.getNum1() + " * " + dto.getNum2() + " = " + result;
@@ -61,12 +52,6 @@ public class CalculatorController {
     public String divide(@RequestParam(required = false) Integer num1, @RequestParam(required = false) Integer num2) {
         dto.setNum1(num1);
         dto.setNum2(num2);
-        if (calculatorService.check(dto.getNum1(), dto.getNum2())) {
-            return "Вы должны ввести оба аргумента!";
-        }
-        if (dto.getNum2() == 0) {
-            return "На ноль делить нельзя!";
-        }
 
         int result = calculatorService.divide(dto.getNum1(), dto.getNum2());
         return dto.getNum1() + " / " + dto.getNum2() + " = " + result;
